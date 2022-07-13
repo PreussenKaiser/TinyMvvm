@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using TinyMvvm;
+using TinyMvvm.Maui.Extensions;
 using TinyMvvm.Sample.Services;
 using TinyMvvm.Sample.ViewModels;
 using TinyMvvm.Sample.Views;
@@ -26,15 +27,19 @@ public static class MauiProgram
 
 		builder.Services.AddSingleton<ICityService, CityService>();
 
-		builder.Services.AddTransient<MainView>();
-        builder.Services.AddTransient<ListView>();
-        builder.Services.AddTransient<DetailsView>();
+		// builder.Services.AddTransient<MainView>();
+		// builder.Services.AddTransient<ListView>();
+		// builder.Services.AddTransient<DetailsView>();
 
-        builder.Services.AddTransient<MainViewModel>();
-        builder.Services.AddTransient<ListViewModel>();
-        builder.Services.AddTransient<DetailsViewModel>();
+		// builder.Services.AddTransient<MainViewModel>();
+		// builder.Services.AddTransient<ListViewModel>();
+		// builder.Services.AddTransient<DetailsViewModel>();
 
-		Routing.RegisterRoute(nameof(DetailsViewModel), typeof(DetailsView));
+		// Routing.RegisterRoute(nameof(DetailsViewModel), typeof(DetailsView));
+
+		builder.Services.AddViewAndViewModel<MainView, MainViewModel>()
+						.AddViewAndViewModel<ListView, ListViewModel>()
+						.AddViewAndViewModelWithRoute<DetailsView, DetailsViewModel>(nameof(DetailsViewModel));
 
         return builder.Build();
 	}
